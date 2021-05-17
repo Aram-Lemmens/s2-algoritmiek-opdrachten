@@ -7,39 +7,52 @@ namespace Simpel_algortime
 {
     class Order
     {
-        List<Product> products = ProductList.GetAllPrices();
-        Product product = new Product();
-        //public double[] Make_List_to_Array()
-        //{
-        //    //double[] products_ToArray = datas.;
-        //    List<double> products = new List<double>();
-        //    double[] products_ToArray = products.ToArray();
-        //    return products_ToArray;
-        //}
-
-        public double GiveMaximumPrice()
+        public List<Product> products { get; private set; }
+    public Order(List<Product> newProducts)
         {
-            double[] Price = new double[products.Count];
-            double Biggest_number = Price[0];
+            products = newProducts;
+        }
 
-            for (int i = 0; i < Price.Length; i++)
+        public Product GetHighestPriceProduct()
+        {
+            if (!(products.Count > 0))
             {
-                if (Biggest_number < Price[i])
+                return null;
+            }
+
+            Product HighestPriceProduct = products[0];
+            for (int i = 0; i < products.Count; i++)
+            {
+                if (HighestPriceProduct.Price < products[i].Price)
                 {
-                    Biggest_number = Price[i];
+                    HighestPriceProduct = products[i];
                 }
             }
-            return Biggest_number;
+            return HighestPriceProduct;
         }
-        public double GiveAveragePrice(double All_prices)
+        public double GiveAveragePrice()
         {
-            int Count = products.Count;
-            double Average = All_prices / Count;
+            double All_prices = 0;
+
+            for (int j = 0; j < products.Count; j++)
+            {
+                All_prices += products[j].Price;
+            }
+
+            double Average = All_prices / products.Count;
             return Average;
         }
-        public IEnumerable<Product> GetAllProducts()
+        public List<Product> GetAllProducts(double Minimum_Price)
         {
-            return products.AsReadOnly();
+            List<Product> AllMinProducts = new List<Product>();
+            for (int i = 0; i < products.Count; i++)
+            {
+                if (Minimum_Price < products[i].Price)
+                {
+                    AllMinProducts.Add(products[i]);
+                }
+            }
+            return AllMinProducts;
         }
         public double[] SortProductsByPrice()
         {

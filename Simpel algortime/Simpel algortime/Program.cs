@@ -7,15 +7,20 @@ namespace Simpel_algortime
     {
         static void Main(string[] args)
         {
-            Order order = new Order();
-            List<Product> products = ProductList.LoadData();
+            Order order = new Order(ProductList.LoadData());
 
-            foreach (var item in products)
+            foreach (var item in order.products)
             {
                 Console.WriteLine($"{item.Name} {item.Price}");
             }
-            double max = order.GiveMaximumPrice();
-            Console.WriteLine(max);
+            Product HighestPriceProduct = order.GetHighestPriceProduct();
+            Console.WriteLine(HighestPriceProduct.Name);
+
+            double AveragePrice = order.GiveAveragePrice();
+            Console.WriteLine(AveragePrice);
+
+            Product GetProducts = order.GetAllProducts(2);
+            Console.WriteLine(GetProducts);
         }
     }
 }

@@ -11,19 +11,19 @@ namespace Simpel_algortime
         {
             List<Product> products = new List<Product>();
             products.Add(new Product { Name = "Milk", Price = 1.4 });
-            products.Add(new Product { Name = "Bread", Price = 2.1 });
-            products.Add(new Product { Name = "Meat", Price = 3.42 });
+            products.Add(new Product { Name = "Bread", Price = 3.1 });
+            products.Add(new Product { Name = "Meat", Price = 2.42 });
             return products;
         }
-        public static List<Product> GetAllPrices()
-        {
-            List<Product> Data = LoadData();
-            var newlist = new List<Product>();
-            foreach (var item in Data)
-            {
-                newlist.Add(item.Price);
-            }
-            return newlist;
-        }
+        //public static List<Product> GetAllPrices()
+        //{
+        //    List<Product> Data = LoadData();
+        //    var newlist = new List<Product>();
+        //    foreach (var item in Data)
+        //    {
+        //        newlist.Add(item.Price);
+        //    }
+        //    return newlist;
+        //}
     }
 }
