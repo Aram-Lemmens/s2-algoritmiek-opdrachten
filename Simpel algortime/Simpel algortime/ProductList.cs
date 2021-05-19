@@ -13,6 +13,9 @@ namespace Simpel_algortime
             products.Add(new Product { Name = "Milk", Price = 1.4 });
             products.Add(new Product { Name = "Bread", Price = 3.1 });
             products.Add(new Product { Name = "Meat", Price = 2.42 });
+            products.Add(new Product { Name = "Cheese", Price = 0.5 });
+            products.Add(new Product { Name = "Wine", Price = 3.6 });
+            products.Add(new Product { Name = "Beef", Price = 4.42 });
             return products;
         }
         //public static List<Product> GetAllPrices()

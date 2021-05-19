@@ -8,10 +8,13 @@ namespace Simpel_algortime
     class Order
     {
         public List<Product> products { get; private set; }
-    public Order(List<Product> newProducts)
-        {
-            products = newProducts;
-        }
+        public List<Product> newlistminpriceproduct = new List<Product>();
+        public List<Product> productsortlist = new List<Product>();
+
+        public Order(List<Product> newProducts)
+            {
+                products = newProducts;
+            }
 
         public Product GetHighestPriceProduct()
         {
@@ -30,8 +33,14 @@ namespace Simpel_algortime
             }
             return HighestPriceProduct;
         }
+
         public double GiveAveragePrice()
         {
+            if (!(products.Count > 0))
+            {
+                return 0;
+            }
+
             double All_prices = 0;
 
             for (int j = 0; j < products.Count; j++)
@@ -42,38 +51,74 @@ namespace Simpel_algortime
             double Average = All_prices / products.Count;
             return Average;
         }
+
         public List<Product> GetAllProducts(double Minimum_Price)
         {
-            List<Product> AllMinProducts = new List<Product>();
+            if (!(products.Count > 0))
+            {
+                return null;
+            }
+
+            newlistminpriceproduct.Clear();
             for (int i = 0; i < products.Count; i++)
             {
                 if (Minimum_Price < products[i].Price)
                 {
-                    AllMinProducts.Add(products[i]);
+                    newlistminpriceproduct.Add(products[i]);
                 }
             }
-            return AllMinProducts;
+            return newlistminpriceproduct;
         }
-        public double[] SortProductsByPrice()
+        public List<Product> SortProductsByPriceLowToHigh(string sort)
         {
-            double[] Price = new double[products.Count];
-            double[] SortProduct = {0};
-            double Number = Price[0];
-            for (int i = 0; i < Price.Length; i++)
+            if (sort == "low")
             {
-                for (int j = 0; j < Price.Length; j++)
+                for (var i = 0; i < products.Count; i++)
                 {
-                    if (Number < Price[i])
+                    var min = i;
+                    for (var j = i + 1; j < products.Count; j++)
                     {
-                        if (Number != SortProduct[i])
+                        if (products[min].Price > products[j].Price)
                         {
-                            Number = Price[i];
+                            min = j;
                         }
                     }
+
+                    if (min != i)
+                    {
+                        var lowerValue = products[min];
+                        products[min] = products[i];
+                        products[i] = lowerValue;
+                    }
                 }
-                SortProduct[i] = Number;
+                return products;
             }
-            return SortProduct;
+            if (sort == "high")
+            {
+                for (var i = 0; i < products.Count; i++)
+                {
+                    var min = i;
+                    for (var j = i + 1; j < products.Count; j++)
+                    {
+                        if (products[min].Price < products[j].Price)
+                        {
+                            min = j;
+                        }
+                    }
+
+                    if (min != i)
+                    {
+                        var lowerValue = products[min];
+                        products[min] = products[i];
+                        products[i] = lowerValue;
+                    }
+                }
+                return products;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
