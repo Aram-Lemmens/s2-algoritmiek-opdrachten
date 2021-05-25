@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Simpel_algortime
 {
-    class Order
+    public class Order
     {
         public List<Product> products { get; private set; }
         public List<Product> newlistminpriceproduct = new List<Product>();
@@ -49,7 +49,7 @@ namespace Simpel_algortime
             }
 
             double Average = All_prices / products.Count;
-            return Average;
+            return Math.Round(Average, 2);
         }
 
         public List<Product> GetAllProducts(double Minimum_Price)

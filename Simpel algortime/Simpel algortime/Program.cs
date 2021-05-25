@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Simpel_algortime
@@ -9,6 +9,7 @@ namespace Simpel_algortime
         {
             Order order = new Order(ProductList.LoadData());
             bool check = true;
+            Console.WriteLine("The commands are max, avg, all and sort");
             while (check)
             {
                 string consoleread = Console.ReadLine();
